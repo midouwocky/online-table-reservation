@@ -8,12 +8,16 @@ import { Table } from '../shared/models/table.model';
 })
 export class TableService {
 
-  
+
   constructor(
     private http: HttpClient
   ) { }
 
   getTables(): Observable<Table[]> {
     return this.http.get<Table[]>('/api/tables');
+  }
+
+  addTable(table: Table): Observable<Table> {
+    return this.http.post<Table>('/api/tables', table);
   }
 }

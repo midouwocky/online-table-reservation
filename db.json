@@ -3,7 +3,13 @@
     {
       "id": 1,
       "location": "middle",
-      "sits": 4
+      "sits": 4,
+      "reservations": [
+        {
+          "start": 1606471200000,
+          "end": 1606478400000
+        }
+      ]
     },
     {
       "id": 2,
@@ -11,9 +17,10 @@
       "sits": 6
     },
     {
-      "id": 2,
+      "id": 3,
       "location": "right",
-      "sits": 5
+      "sits": 5,
+      "reservations": []
     }
   ]
 }

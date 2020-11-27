@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { createFeatureSelector, createSelector, select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Table } from 'src/app/shared/models/table.model';
+import { TableService } from 'src/app/services/table.service';
+import { Table, TableFilter } from 'src/app/shared/models/table.model';
 import { getTablesStart } from '../table.action';
 import { TablesState } from '../tables-state';
 
@@ -16,16 +17,18 @@ export class TablesComponent implements OnInit {
   tables$: Observable<Table[]>;
   errorMessage$: Observable<string>;
 
+  filter: TableFilter = {};
+
   constructor(
-    private store: Store<{ tables: TablesState }>,
+    private store: Store<{ tables: TablesState }>
   ) { }
 
   ngOnInit(): void {
     this.tables$ = this.store.pipe(select((state: any) => state.tables.tables));
-    this.store.pipe(select((state: any) => state.tables.tables)).subscribe(res => {
-      console.log(res);
-    });
-    this.store.dispatch(getTablesStart());
+    this.getTables();
   }
 
+  getTables() {
+    this.store.dispatch(getTablesStart({ filter: this.filter }));
+  }
 }
