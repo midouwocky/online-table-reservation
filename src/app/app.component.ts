@@ -1,3 +1,4 @@
+import { ChangeDetectionStrategy } from '@angular/compiler/src/core';
 import { Component } from '@angular/core';
 
 @Component({

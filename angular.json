@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ngrx-tut"
+    }
+  },
+  "defaultProject": "ngrx-tut",
+  "cli": {
+    "analytics": false
+  }
 }

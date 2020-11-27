@@ -1,0 +1,19 @@
+{
+  "tables": [
+    {
+      "id": 1,
+      "location": "middle",
+      "sits": 4
+    },
+    {
+      "id": 2,
+      "location": "left",
+      "sits": 6
+    },
+    {
+      "id": 2,
+      "location": "right",
+      "sits": 5
+    }
+  ]
+}
