@@ -3,6 +3,10 @@ import { CommonModule } from '@angular/common';
 import { TablesRoutingModule } from './tables-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { TablesComponent } from './tables/tables.component';
+import { StoreModule } from '@ngrx/store';
+import { tablesReducer } from './table.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { TablesEffects } from './table.effects';
 
 
 
@@ -13,7 +17,9 @@ import { TablesComponent } from './tables/tables.component';
   imports: [
     CommonModule,
     TablesRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forFeature('tables', tablesReducer),
+    EffectsModule.forFeature([ TablesEffects ])
   ]
 })
 export class TablesModule { }

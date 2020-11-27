@@ -1,13 +1,14 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Table } from '../shared/models/table.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TablesService {
+export class TableService {
 
+  
   constructor(
     private http: HttpClient
   ) { }
