@@ -4,14 +4,13 @@
         <div class="col-xl-8">
             <div class="card">
                 <div class="card-body">
+                    <app-table-filter (filterChange)="onFilterChange($event)"></app-table-filter>
                     <div class="table-responsive">
-                        <app-table-filter (filterChange)="onFilterChange($event)"></app-table-filter>
                         <app-tables-table [tables]="tables$ | async"></app-tables-table>
-
-                        <p class="text-center" *ngIf="(tables$  | async)?.length === 0">
-                            You have no Tables
-                        </p>
                     </div>
+                    <p class="text-center" *ngIf="(tables$  | async)?.length === 0">
+                        You have no Tables
+                    </p>
                 </div>
             </div>
         </div>

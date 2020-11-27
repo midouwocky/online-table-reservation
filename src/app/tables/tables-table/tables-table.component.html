@@ -4,6 +4,7 @@
         <th scope="col">Id</th>
         <th scope="col">Location</th>
         <th scope="col">Number of sits</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -11,6 +12,18 @@
         <th scope="row">{{table.id}}</th>
         <td>{{table.location}}</td>
         <td>{{table.sits}}</td>
+        <td (click)="$event.stopPropagation();">
+          <div class="dropdown align-self-center float-right" ngbDropdown container="body">
+            <a href="javascript: void(0);" class="dropdown-toggle arrow-none text-muted" ngbDropdownToggle>
+              <i class="uil uil-ellipsis-v"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
+              <!-- item-->
+              <a href="javascript:void(0);" class="dropdown-item" [routerLink]="['book-table']"
+              [state]="{table: table}">Book</a>
+            </div>
+          </div>
+        </td>
       </tr>
       <tr>
     </tbody>

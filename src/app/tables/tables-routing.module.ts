@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: TablesComponent
+  },
+  {
+    path: 'book-table',
+    loadChildren: () => import('./reservation/reservation.module').then(m => m.ReservationModule)
   }
 ];
 
