@@ -1,14 +1,51 @@
 <div class="container-fluid">
-
     <div class="row justify-content-md-center">
-        <div class="col-xl-8">
+        <div class="col-xl-6">
+            <ngb-alert *ngIf="submitForm && reservationFormGroup.errors?.invalidTime" type="danger"
+                [dismissible]="false">
+                Start Time should be before end time
+            </ngb-alert>
             <div class="card">
                 <div class="card-body">
-                    <form>
-                        <ul class="list-inline mb-0">
+                    <form (ngSubmit)="submitBooking()" [formGroup]="reservationFormGroup">
+                        <div class="col-md-12">
+                            <div class="form-group mb-3">
+                                <input type="text" class="form-control" [format]="24" placeholder="start time"
+                                    [ngxTimepicker]="startPicker" formControlName="startTime" required>
+                                <ngx-material-timepicker #startPicker></ngx-material-timepicker>
+                                <div *ngIf="submitForm && reservationFormGroup.controls.startTime.errors"
+                                    class="invalid-feedback">
+                                    <span
+                                        *ngIf="submitForm && reservationFormGroup.controls.startTime.errors?.required">Required</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group mb-3">
+                                <input type="text" id="range-datepicker" class="form-control" formControlName="date"
+                                    placeholder="2018-10-03 to 2018-10-10" mwlFlatpickr [convertModelValue]="true"
+                                    required>
 
+                                <div *ngIf="submitForm && reservationFormGroup.controls.date.errors"
+                                    class="invalid-feedback">
+                                    <span *ngIf="reservationFormGroup.controls.date.errors.required">Required</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group mb-3">
+                                <input type="text" class="form-control" [format]="24" placeholder="end time"
+                                    [ngxTimepicker]="endPicker" formControlName="endTime" required>
+                                <ngx-material-timepicker #endPicker></ngx-material-timepicker>
+                                <div *ngIf="submitForm && reservationFormGroup.controls.endTime.errors"
+                                    class="invalid-feedback">
+                                    <span *ngIf="reservationFormGroup.controls.endTime.errors.required">Required</span>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="list-inline mb-0">
                             <li class="previous list-inline-item"><button class="btn btn-secondary" type="button"
-                                    [routerLink]="['/staff']">Back</button>
+                                    [routerLink]="['/tables']">Back</button>
                             </li>
                             <li class="next list-inline-item float-right"><button class="btn btn-primary"
                                     type="submit">Submit</button></li>

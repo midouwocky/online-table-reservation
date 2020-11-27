@@ -9,7 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { TablesEffects } from './table.effects';
 import { TablesTableComponent } from './tables-table/tables-table.component';
 import { TableFilterComponent } from './table-filter/table-filter.component';
-import { NgbTimepickerModule, NgbAlertModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAlertModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlatpickrModule } from 'angularx-flatpickr';
@@ -29,7 +29,6 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     HttpClientModule,
     StoreModule.forFeature('tables', tablesReducer),
     EffectsModule.forFeature([ TablesEffects ]),
-    NgbTimepickerModule,
     NgxMaterialTimepickerModule,
     FormsModule,
     ReactiveFormsModule,
