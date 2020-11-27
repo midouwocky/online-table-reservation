@@ -6,6 +6,10 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { StoreModule } from '@ngrx/store';
+import { reservationReducer } from './reservation.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { ReservationEffects } from './reservatioin.effects';
 
 
 
@@ -18,7 +22,9 @@ import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     FlatpickrModule.forRoot(),
     NgxMaterialTimepickerModule,
-    NgbAlertModule
+    NgbAlertModule,
+    StoreModule.forFeature('reservation', reservationReducer),
+    EffectsModule.forFeature([ ReservationEffects ]),
   ]
 })
 export class ReservationModule { }

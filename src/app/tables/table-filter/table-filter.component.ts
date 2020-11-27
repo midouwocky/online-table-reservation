@@ -35,7 +35,7 @@ export class TableFilterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  refreshData() {
+  refreshData = () => {
     const filter: TableFilter = {};
     if (this.intervalControl.value
       && this.startTimeControl.value
@@ -44,11 +44,11 @@ export class TableFilterComponent implements OnInit {
       const endDate = moment(this.intervalControl.value.to ? this.intervalControl.value.to : this.intervalControl.value.from);
 
       startDate
-      .add(this.dh.getHours(this.startTimeControl.value), 'hours')
-      .add(this.dh.getMinutes(this.startTimeControl.value), 'minute');
+        .add(this.dh.getHours(this.startTimeControl.value), 'hours')
+        .add(this.dh.getMinutes(this.startTimeControl.value), 'minute');
       endDate
-      .add(this.dh.getHours(this.endTimeControl.value), 'hours')
-      .add(this.dh.getMinutes(this.endTimeControl.value), 'minute');
+        .add(this.dh.getHours(this.endTimeControl.value), 'hours')
+        .add(this.dh.getMinutes(this.endTimeControl.value), 'minute');
 
       if (endDate.isBefore(startDate)) {
         this.error = 'Date or time invalid';
@@ -65,9 +65,7 @@ export class TableFilterComponent implements OnInit {
       filter.sits = this.sitsNumberControl.value;
     }
 
-    if (filter.range || filter.sits) {
-      this.filterChange.emit(filter);
-    }
+    this.filterChange.emit(filter);
   }
 
 }

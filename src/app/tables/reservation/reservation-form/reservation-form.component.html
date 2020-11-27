@@ -11,7 +11,8 @@
             </ngb-alert>
             <div class="card">
                 <div class="card-body">
-                    <form (ngSubmit)="submitBooking()" [formGroup]="reservationFormGroup">
+                    <h4 class="text-center">Add reservation for table: {{table?.id}}, located: {{table?.location}}</h4>
+                    <form (ngSubmit)="submitBooking()" [formGroup]="reservationFormGroup" *ngIf="reservationFormGroup">
                         <div class="col-md-12">
                             <div class="form-group mb-3">
                                 <input type="text" class="form-control" [format]="24" placeholder="start time"
@@ -27,7 +28,7 @@
                         <div class="col-md-12">
                             <div class="form-group mb-3">
                                 <input type="text" id="range-datepicker" class="form-control" formControlName="date"
-                                    placeholder="2018-10-03 to 2018-10-10" mwlFlatpickr [convertModelValue]="true"
+                                    placeholder="Choose a date" mwlFlatpickr [convertModelValue]="true"
                                     required>
 
                                 <div *ngIf="submitForm && reservationFormGroup.controls.date.errors"
@@ -49,7 +50,7 @@
                         </div>
                         <ul class="list-inline mb-0">
                             <li class="previous list-inline-item"><button class="btn btn-secondary" type="button"
-                                    [routerLink]="['/tables']">Back</button>
+                                   (click)="cancelBooking()">Back</button>
                             </li>
                             <li class="next list-inline-item float-right"><button class="btn btn-primary"
                                     type="submit">Submit</button></li>

@@ -20,4 +20,9 @@ export class TableService {
   addTable(table: Table): Observable<Table> {
     return this.http.post<Table>('/api/tables', table);
   }
+
+  editTable(table: Table): Observable<Table> {
+    return this.http.put<Table>(`/api/tables/${table.id}`, table);
+  }
+
 }

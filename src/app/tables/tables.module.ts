@@ -35,7 +35,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     FlatpickrModule.forRoot(),
     NgbAlertModule,
     StoreRouterConnectingModule.forRoot(),
-    NgbDropdownModule
+    NgbDropdownModule,
   ]
 })
 export class TablesModule { }
