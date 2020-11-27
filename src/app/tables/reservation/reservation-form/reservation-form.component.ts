@@ -37,7 +37,7 @@ export class ReservationFormComponent implements OnInit {
       startTime: [null, Validators.required],
       date: [null, Validators.required],
       endTime: [null, Validators.required]
-    }, {validators: this.timeValidator.bind(this)});
+    }, { validators: [this.timeValidator.bind(this), this.crossReservationValidator.bind(this)] });
   }
 
   submitBooking() {
@@ -54,18 +54,44 @@ export class ReservationFormComponent implements OnInit {
   timeValidator(formGroup: FormGroup) {
     if (formGroup.value.date && formGroup.value.startTime && formGroup.value.endTime) {
       const startDate = moment(formGroup.value.date)
-      .add(this.dh.getHours(formGroup.value.startTime), 'hours')
-      .add(this.dh.getMinutes(formGroup.value.startTime), 'minute');
-  
-  
+        .add(this.dh.getHours(formGroup.value.startTime), 'hours')
+        .add(this.dh.getMinutes(formGroup.value.startTime), 'minute');
+
       const endDate = moment(formGroup.value.date)
-      .add(this.dh.getHours(formGroup.value.endTime), 'hours')
-      .add(this.dh.getMinutes(formGroup.value.endTime), 'minute');
-  
+        .add(this.dh.getHours(formGroup.value.endTime), 'hours')
+        .add(this.dh.getMinutes(formGroup.value.endTime), 'minute');
+
       if (endDate.isBefore(startDate)) {
         return this.generateInvalidTimeError(formGroup);
       } else {
         return this.removeInvalidTimeError(formGroup);
+      }
+    }
+  }
+
+  /**
+   * validator for an existing reservation that cross the new one
+   * @param formGroup form group
+   */
+  crossReservationValidator(formGroup: FormGroup) {
+    if (!this.table.reservations) {
+      return this.removeNotEmptyError(formGroup);
+    }
+    if (formGroup.value.date && formGroup.value.startTime && formGroup.value.endTime) {
+      const startDate = moment(formGroup.value.date)
+        .add(this.dh.getHours(formGroup.value.startTime), 'hours')
+        .add(this.dh.getMinutes(formGroup.value.startTime), 'minute').toDate().getTime();
+
+      const endDate = moment(formGroup.value.date)
+        .add(this.dh.getHours(formGroup.value.endTime), 'hours')
+        .add(this.dh.getMinutes(formGroup.value.endTime), 'minute').toDate().getTime();
+      const reservationsCrossPeriod = this.table.reservations.filter(reservation =>
+        reservation.end > startDate && endDate > reservation.start
+      );
+      if (reservationsCrossPeriod.length > 0) {
+        return this.generateNotEmptyError(formGroup);
+      } else {
+        return this.removeNotEmptyError(formGroup);
       }
     }
   }
@@ -85,5 +111,20 @@ export class ReservationFormComponent implements OnInit {
     const errors = formControl.errors ? formControl.errors : {};
     errors.invalidTime = true;
     return errors;
+  }
+
+  generateNotEmptyError(formControl: FormGroup) {
+    const errors = formControl.errors ? formControl.errors : {};
+    errors.notEmpty = true;
+    return errors;
+  }
+
+  removeNotEmptyError(formControl: FormGroup) {
+    if (formControl.errors && formControl.errors.notEmpty) {
+      delete formControl.errors.notEmpty;
+    }
+    if (!formControl.errors || Object.keys(formControl).length === 0) {
+      return null;
+    }
   }
 }

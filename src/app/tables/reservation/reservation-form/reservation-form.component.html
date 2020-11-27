@@ -5,6 +5,10 @@
                 [dismissible]="false">
                 Start Time should be before end time
             </ngb-alert>
+            <ngb-alert *ngIf="submitForm && reservationFormGroup.errors?.notEmpty" type="danger"
+                [dismissible]="false">
+                Table is not free in this period please change the time
+            </ngb-alert>
             <div class="card">
                 <div class="card-body">
                     <form (ngSubmit)="submitBooking()" [formGroup]="reservationFormGroup">
