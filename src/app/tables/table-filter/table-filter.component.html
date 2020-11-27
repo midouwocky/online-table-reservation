@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-md-2">
+        <div class="form-group mb-3">
+            <input type="text" class="form-control" [format]="24" placeholder="start Range"
+                [ngxTimepicker]="startPicker" [formControl]="startTimeControl">
+            <ngx-material-timepicker #startPicker></ngx-material-timepicker>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group mb-3">
+            <input type="text" id="range-datepicker" class="form-control" [formControl]="intervalControl"
+                placeholder="2018-10-03 to 2018-10-10" mwlFlatpickr [convertModelValue]="true" mode="range">
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group mb-3">
+            <input type="text" class="form-control" [format]="24" placeholder="end Range" [ngxTimepicker]="endPicker"
+                [formControl]="endTimeControl">
+            <ngx-material-timepicker #endPicker></ngx-material-timepicker>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group mb-3">
+            <input type="number" class="form-control" placeholder="Sits" [formControl]="sitsNumberControl">
+        </div>
+    </div>
+    <div class="col-md-2 mb-3">
+        <button class="btn btn-primary" type="button" (click)="refreshData()">Filter</button>
+    </div>
+</div>

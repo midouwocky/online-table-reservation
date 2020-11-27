@@ -27,4 +27,21 @@ export class DomainHelperService {
     }
     return tables;
   }
+
+  /**
+   * get Hours from a time string
+   * @param time time string
+   */
+  getHours(time: string): number {
+    return +time.substring(0, 2);
+  }
+
+  /**
+   * get Minutes from a time string
+   * @param time time string
+   */
+  getMinutes(time: string): number {
+    return +time.substring(3, 5);
+  }
+
 }

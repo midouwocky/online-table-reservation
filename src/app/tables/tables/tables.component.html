@@ -1,38 +1,20 @@
 <div class="container-fluid">
-  
+
     <div class="row justify-content-md-center">
-      <div class="col-xl-8">
-        <div class="card">
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-striped mb-0">
-                <thead>
-                  <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Location</th>
-                    <th scope="col">Number of sits</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let table of tables$ | async">
-                    <th scope="row">{{table.id}}</th>
-                    <td>{{table.location}}</td>
-                    <td>{{table.sits}}</td>
-                  </tr>
-                  <tr>
-                </tbody>
-              </table>
-  
-              <p class="text-center" *ngIf="(tables$  | async)?.length === 0">
-                You have no Tables
-              </p>
+        <div class="col-xl-8">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <app-table-filter (filterChange)="onFilterChange($event)"></app-table-filter>
+                        <app-tables-table [tables]="tables$ | async"></app-tables-table>
+
+                        <p class="text-center" *ngIf="(tables$  | async)?.length === 0">
+                            You have no Tables
+                        </p>
+                    </div>
+                </div>
             </div>
-
-
-  
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  <!-- end row -->
+</div>
+<!-- end row -->

@@ -31,4 +31,9 @@ export class TablesComponent implements OnInit {
   getTables() {
     this.store.dispatch(getTablesStart({ filter: this.filter }));
   }
+
+  onFilterChange(filter: TableFilter) {
+    this.filter = filter;
+    this.getTables();
+  }
 }
