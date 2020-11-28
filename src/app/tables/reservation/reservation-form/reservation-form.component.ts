@@ -56,7 +56,7 @@ export class ReservationFormComponent implements OnInit {
 
   submitBooking = () => {
     if (this.reservationFormGroup.valid) {
-      const reservation = new Reservation()
+      const reservation = new Reservation();
       reservation.start = moment(this.reservationFormGroup.value.date)
         .add(this.dh.getHours(this.reservationFormGroup.value.startTime), 'hours')
         .add(this.dh.getMinutes(this.reservationFormGroup.value.startTime), 'minute').toDate().getTime();
@@ -71,7 +71,7 @@ export class ReservationFormComponent implements OnInit {
 
   /**
    * Validator for time
-   * @param formGroup 
+   * @param formGroup form group
    */
   timeValidator = (formGroup: FormGroup) => {
     if (formGroup.value.date && formGroup.value.startTime && formGroup.value.endTime) {
